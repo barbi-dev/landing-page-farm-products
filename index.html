@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Alimentos naturales del campo en New Jersey. Huevos, gallinas, miel y polen. Pide por WhatsApp." />
+  <title>Farm Foods</title>
+
+  <!-- Color de tema (movil) -->
+  <meta name="theme-color" content="#99BC85" />
+
+  <!-- Favicon en SVG (sin archivos extra) -->
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,
+  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="32" fill="%23FDFAF6"/>
+    <ellipse cx="32" cy="34" rx="14" ry="18" fill="%2399BC85"/>
+    <path d="M32 22 C36 26 36 30 32 34 C28 30 28 26 32 22 Z" fill="%23E4EFE7"/>
+  </svg>' />
+
+  <style>
+    :root{
+      --beige:#F5C9B0;
+      --crema:#FDFAF6;
+      --verde-suave:#E4EFE7;
+      --verde-fuerte:#99BC85;
+      --text:#1f2a24;
+      --muted:#52655c;
+      --card:#ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 18px;
+      --max: 1080px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 5% -5%, var(--beige), transparent 95%);
+      line-height:1.3;
+    }
+    a{color:inherit}
+    .container{max-width:var(--max); margin:0 auto; padding:20px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:14px 18px; background: rgba(253,250,246,.75);
+      border:1px solid rgba(153,188,133,.25);
+      border-radius: var(--radius);
+      backdrop-filter: blur(8px);
+      position: sticky; top: 12px; z-index: 10;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{
+      width:38px; height:38px; flex:0 0 38px;
+      border-radius: 50%;
+      box-shadow: 0 6px 16px rgba(0,0,0,.10);
+      overflow:hidden;
+    }
+    .brand h1{font-size:14px; margin:0; letter-spacing:.2px}
+    .brand p{font-size:12px; margin:0; color:var(--muted)}
+    .lang{
+      display:flex; gap:8px; align-items:center;
+      background: rgba(228,239,231,.7);
+      border:1px solid rgba(153,188,133,.35);
+      padding:3px; border-radius: 999px;
+    }
+    .pill{
+      border:0; cursor:pointer;
+      padding:3px 4px; border-radius:999px;
+      background: transparent; color:var(--text); font-weight:600;
+      font-size:10px;
+    }
+    .pill[aria-pressed="true"]{
+      background: var(--verde-fuerte);
+      color: #0f1a14;
+    }
+
+    .hero{
+      display:grid;
+    }
+
+    .heroCard{
+      background: rgba(255,255,255,.7);
+      border:1px solid rgba(153,188,133,.25);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 12px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; font-weight:700; color: #163020;
+      background: rgba(153,188,133,.25);
+      border:1px solid rgba(153,188,133,.35);
+      padding: 6px 10px; border-radius:999px;
+    }
+    .heroTitle{
+      margin:14px 0 10px;
+      font-size: 40px;
+      line-height:1.06;
+      letter-spacing:-.6px;
+    }
+    @media (max-width: 520px){
+      .heroTitle{font-size:24px}
+    }
+    .heroText{
+      margin:0 0 16px;
+      color: var(--muted);
+      font-size:16px;
+      max-width: 58ch;
+    }
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(0,0,0,.08);
+      text-decoration:none;
+      font-weight:700;
+      cursor:pointer;
+      transition: transform .18s ease, box-shadow .15s ease;
+      will-change: transform;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btnPrimary{
+      background: var(--verde-fuerte);
+      color:#0f1a14;
+      box-shadow: 0 10px 18px rgba(153,188,133,.25);
+    }
+    .btnGhost{
+      background: var(--beige);
+      color: var(--text);
+      border:1px solid rgba(153,188,133,.35);
+    }
+    .note{
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+
+    section{margin-top: 22px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 1000px){ .grid{grid-template-columns: repeat(2,1fr)} }
+    @media (max-width: 520px){ .grid{grid-template-columns: 1fr} }
+
+    .card{
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(153,188,133,.25);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 13px;
+      min-height: 180px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; font-weight:800;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(228,239,231,.85);
+      border:1px solid rgba(153,188,133,.35);
+      width: fit-content;
+    }
+    .card h3{margin:0; font-size:16px}
+    .card p{margin:0; color:var(--muted); font-size:13px}
+    .card-img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        border-radius: 12px;
+        margin-bottom: 4px;
+    }
+
+    .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px){ .twoCol{grid-template-columns:1fr} }
+
+    .steps{margin:0; padding-left:18px; color:var(--muted)}
+    .steps li{margin:10px 0}
+
+    .gallery{
+      display:grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px){ .gallery{grid-template-columns:1fr 1fr} }
+    @media (max-width: 520px){ .gallery{grid-template-columns:1fr} }
+    .ph{
+      background: linear-gradient(135deg, rgba(245,201,176,.65), rgba(228,239,231,.8));
+      border:1px dashed rgba(0,0,0,.15);
+      border-radius: var(--radius);
+      min-height: 160px;
+      display:flex; align-items:center; justify-content:center;
+      color: rgba(0,0,0,.45);
+      font-weight:800;
+      text-align:center;
+      padding: 12px;
+    }
+    footer{
+      margin: 30px 0 10px;
+      color: var(--muted);
+      font-size: 12px;
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    }
+    .small{font-size:12px; color:var(--muted)}
+    .divider{height:1px; background: rgba(153,188,133,.25); margin: 18px 0}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px; border-radius: 999px;
+      background: rgba(253,250,246,.85);
+      border:1px solid rgba(153,188,133,.35);
+      font-weight:800;
+    }
+    .slider{
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: rgba(255,255,255,.75);
+    border: 1px solid rgba(153,188,133,.25);
+    box-shadow: var(--shadow);
+    }
+
+    .track{
+    display: flex;
+    transition: transform 500ms ease;
+    will-change: transform;
+    }
+
+    .slide{
+    flex: 0 0 100%;
+    margin: 0;
+    aspect-ratio: 16 / 9; /* ajusta si quieres 4/3 */
+    background: linear-gradient(135deg, rgba(245,201,176,.35), rgba(228,239,231,.65));
+    display:flex;
+    }
+
+    .slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display:block;
+    }
+
+    /* Botones */
+    .nav1{
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+    border: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 800;
+    background: rgba(253,250,246,.85);
+    border: 1px solid rgba(153,188,133,.35);
+    box-shadow: 0 10px 18px rgba(0,0,0,.10);
+    }
+    .nav1:hover{ transform: translateY(-50%) scale(1.02); }
+    .nav1.prev{ left: 10px; }
+    .nav1.next{ right: 10px; }
+
+    /* Dots */
+    .dots{
+    position:absolute;
+    left: 0; right: 0;
+    bottom: 10px;
+    display:flex;
+    justify-content:center;
+    gap: 8px;
+    padding: 6px;
+    }
+    .dot{
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(153,188,133,.55);
+    background: rgba(253,250,246,.75);
+    cursor:pointer;
+    }
+    .dot.active{
+    background: var(--verde-fuerte);
+    border-color: rgba(0,0,0,.08);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header class="nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- SVG logo (mismo del favicon) -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="32" fill="#FDFAF6"/>
+            <ellipse cx="32" cy="34" rx="14" ry="18" fill="#99BC85"/>
+            <path d="M32 22 C36 26 36 30 32 34 C28 30 28 26 32 22 Z" fill="#E4EFE7"/>
+          </svg>
+        </div>
+        <div>
+          <h1 id="brandName">Alimentos del Campo</h1>
+          <p id="brandSub">Lodi, Belleville, Kearny - NJ· Pedidos por WhatsApp</p>
+        </div>
+      </div>
+
+      <div class="lang" role="group" aria-label="Selector de idioma">
+        <button class="pill" id="btnES" aria-pressed="true" type="button">ES</button>
+        <button class="pill" id="btnEN" aria-pressed="false" type="button">EN</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero">
+        <section class="heroCard" aria-labelledby="heroTitle">
+          <span class="kicker" id="kicker">🌿 Natural · Local · Precio justo</span>
+          <h2 class="heroTitle" id="heroTitle">Siente la diferencia. Siente lo natural.</h2>
+          <p class="heroText" id="heroText">
+            Producimos y vendemos alimentos naturales del campo, libres de químicos.
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn btnPrimary" id="whatsBtn" href="#" target="_blank" rel="noopener">
+              <span aria-hidden="true">📲</span> <span id="whatsBtnText">Pedir por WhatsApp</span>
+            </a>
+            <a class="btn btnGhost" href="#productos" id="seeProducts">
+              <span aria-hidden="true">🥚</span> <span id="seeProductsText">Ver productos</span>
+            </a>
+          </div>
+          <p class="note" id="note">
+            Los pedidos se entregan este miércoles 07 de enero.
+          </p>
+
+        </section>
+
+      </div>
+
+      <section id="productos" aria-labelledby="productsTitle">
+        <h2 id="productsTitle">Productos</h2>
+        <p class="small" id="productsIntro">Elige tu favorito y pide directo por WhatsApp.</p>
+
+        <div class="grid">
+
+        <article class="card">
+            <div class="card-img">
+                <img src="img/eggs.jpeg" alt="Cubetas de huevos de campo">
+            </div>
+
+            <span class="tag" id="tagEggs">🥚 Huevos</span>
+            <h3 id="eggsTitle">Cubetas de huevos</h3>
+            <p id="eggsDesc">Huevos verdes, huevos de campo o cubetas combinadas.</p>
+        </article>
+
+
+          <article class="card">
+            <div class="card-img">
+                <img src="img/hen.jpeg" alt="Gallina de sopa">
+            </div>
+            <span class="tag" id="tagChicken">🐔 Aves</span>
+            <h3 id="chickenTitle">Pollos y gallinas</h3>
+            <p id="chickenDesc">Pollos de campo (enteros) y gallinas de sopa (enteras).</p>
+          </article>
+
+          <article class="card">
+            <div class="card-img">
+                <img src="img/honey.jpeg" alt="Miel en frasco">
+            </div>
+            <span class="tag" id="tagHoney">🍯 Miel</span>
+            <h3 id="honeyTitle">Miel en frasco</h3>
+            <p id="honeyDesc">Miel natural lista para tu mesa</p>
+          </article>
+
+          <article class="card">
+            <div class="card-img">
+                <img src="img/pollen.jpeg" alt="Polen en frasco">
+            </div>
+            <span class="tag" id="tagPollen">🌼 Polen </span>
+            <h3 id="pollenTitle">Polen en frasco</h3>
+            <p id="pollenDesc">Polen natural, tiene propiedades medicinales.</p>
+          </article>
+        </div>
+      </section>
+      <section aria-labelledby="galleryTitle">
+
+        <h2 id="galleryTitle">Fotos de la granja</h2>
+        <p class="small" id="galleryIntro">Mini galería.</p>
+
+        <div class="slider" id="farmSlider" aria-label="Galería de fotos (deslizador)">
+            <div class="track" id="farmTrack">
+            <figure class="slide">
+                <img src="img/chicken.jpeg" alt="Pollos de campo">
+            </figure>
+            <figure class="slide">
+                <img src="img/honey2.jpeg" alt="Miel y polen en frasco">
+            </figure>
+            <figure class="slide">
+                <img src="img/eggs1.jpeg" alt="Comparación de huevos">
+            </figure>
+            </div>
+
+            <!-- Controles opcionales -->
+            <button class="nav1 prev" type="button" aria-label="Anterior">‹</button>
+            <button class="nav1 next" type="button" aria-label="Siguiente">›</button>
+
+            <div class="dots" id="farmDots" aria-label="Indicadores"></div>
+        </div>
+      </section>
+
+
+      <section class="twoCol" aria-label="Cómo pedir y contacto">
+        <div class="card">
+          <h3 id="howTitle">Cómo pedir</h3>
+          <ol class="steps" id="howSteps">
+            <li>Escríbenos por WhatsApp.</li>
+            <li>Dinos qué productos quieres y cantidad.</li>
+            <li>Confirmamos disponibilidad y entrega.</li>
+          </ol>
+          <a class="btn btnPrimary" id="whatsBtn2" href="#" target="_blank" rel="noopener">
+            <span aria-hidden="true">📲</span> <span id="whatsBtnText2">Pedir por WhatsApp</span>
+          </a>
+          <p class="note" id="note2">Las entregas se realizarán este miércoles 07 de enero</p>
+        </div>
+
+      </section>
+
+      <footer>
+        <div>© <span id="year"></span> <span id="footerBrand">Alimentos del Campo</span></div>
+        <div id="footerSlogan">“Siente la diferencia. Siente lo natural.”</div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // ====== Placeholders configurables ======
+    const CONFIG = {
+      // WhatsApp: pon el número en formato internacional sin "+" ni espacios.
+      // EJEMPLO real: "15551234567"
+      whatsappNumber: "12014677184",
+
+      // Mensajes prellenados (puedes cambiarlos luego)
+      msgES: "Hola, quiero hacer un pedido.",
+      msgEN: "Hi! I’d like to place an order.",
+
+    };
+
+    // Construye el link de WhatsApp
+    function getWhatsAppLink(message){
+      const base = "https://wa.me/" + CONFIG.whatsappNumber;
+      const text = encodeURIComponent(message);
+      return base + "?text=" + text;
+    }
+
+    // ====== Diccionario bilingüe ======
+    const I18N = {
+      es: {
+        brandName: "Alimentos del Campo",
+        brandSub: "Lodi, Belleville, Kearny - NJ · Pedidos por WhatsApp",
+        kicker: "🌿 Natural · Local · Precio justo",
+        heroTitle: "Siente la diferencia. Siente lo natural.",
+        heroText: "Producimos y vendemos alimentos naturales del campo, libres de químicos",
+        whatsBtnText: "Pedir por WhatsApp",
+        seeProductsText: "Ver productos",
+        note: "Los pedidos se entregan este miércoles 07 de enero.",
+        deliveryText: "Lodi, Belleville, Kearny - NJ",
+        deliveryHint: "Kearny - NJ",
+        productsTitle: "Productos",
+        productsIntro: "Elige tu favorito y pide directo por WhatsApp.",
+        tagEggs: "🥚 Huevos",
+        eggsTitle: "Cubetas de huevos",
+        eggsDesc: "Huevos verdes, huevos de campo o cubetas combinadas.",
+        tagChicken: "🐔 Aves",
+        chickenTitle: "Pollos y gallinas",
+        chickenDesc: "Pollos de campo (enteros) y gallinas de sopa (enteras).",
+        tagHoney: "🍯 Miel",
+        honeyTitle: "Miel en frasco",
+        honeyDesc: "Miel natural lista para tu mesa.",
+        tagPollen: "🌼 Polen",
+        pollenTitle: "Polen en frasco",
+        pollenDesc: "Polen natural, tiene propiedades medicinales.",
+        galleryTitle: "Fotos de la granja",
+        galleryIntro: "Mini galería.",
+        howTitle: "Cómo pedir",
+        howSteps: [
+          "Escríbenos por WhatsApp.",
+          "Dinos qué productos quieres y cantidad.",
+          "Confirmamos disponibilidad y entrega."
+        ],
+        whatsBtnText2: "Pedir por WhatsApp",
+        note2: "Las entregas se realizarán este miércoles 07 de enero",
+        footerBrand: "Alimentos del Campo",
+        footerSlogan: "“Siente la diferencia. Siente lo natural.”"
+      },
+      en: {
+        brandName: "Farm Foods",
+        brandSub: "Lodi, Belleville, Kearny - NJ · Orders via WhatsApp",
+        kicker: "🌿 Natural · Local · Fair price",
+        heroTitle: "Taste the difference. Taste natural.",
+        heroText: "We produce and sell natural farm foods with quality at a fair price & chemical-free.",
+        whatsBtnText: "Order on WhatsApp",
+        seeProductsText: "See products",
+        note: "Deliveries will be made this Wednesday, January 7th",
+        deliveryText: "Lodi, Belleville, Kearny - NJ",
+        deliveryHint: "Kearny - NJ ",
+        productsTitle: "Products",
+        productsIntro: "Pick your favorite and order directly on WhatsApp.",
+        tagEggs: "🥚 Eggs",
+        eggsTitle: "Egg trays",
+        eggsDesc: "Green eggs, free-range eggs, or mixed trays.",
+        tagChicken: "🐔 Poultry",
+        chickenTitle: "Chicken & soup hens",
+        chickenDesc: "Free-range chickens (whole) and soup hens (whole).",
+        tagHoney: "🍯 Honey",
+        honeyTitle: "Honey in jars",
+        honeyDesc: "Natural honey ready for your table.",
+        tagPollen: "🌼 Pollen",
+        pollenTitle: "Pollen in jars",
+        pollenDesc: "Natural pollen with healing properties.",
+        galleryTitle: "Farm photos",
+        galleryIntro: "Small gallery.",
+        howTitle: "How to order",
+        howSteps: [
+          "Message us on WhatsApp.",
+          "Tell us what you want and quantities.",
+          "We confirm availability and delivery."
+        ],
+        whatsBtnText2: "Order on WhatsApp",
+        note2: "Deliveries will be made this Wednesday, January 7th",
+
+        footerBrand: "Farm Foods",
+        footerSlogan: "“Taste the difference. Taste natural.”"
+      }
+    };
+
+    function setLang(lang){
+      // Toggle pressed state
+      document.getElementById("btnES").setAttribute("aria-pressed", lang === "es");
+      document.getElementById("btnEN").setAttribute("aria-pressed", lang === "en");
+      document.documentElement.lang = lang;
+
+      const t = I18N[lang];
+
+      // Simple text fields
+      document.getElementById("brandName").textContent = t.brandName;
+      document.getElementById("brandSub").textContent = t.brandSub;
+      document.getElementById("kicker").textContent = t.kicker;
+      document.getElementById("heroTitle").textContent = t.heroTitle;
+      document.getElementById("heroText").textContent = t.heroText;
+
+      document.getElementById("whatsBtnText").textContent = t.whatsBtnText;
+      document.getElementById("seeProductsText").textContent = t.seeProductsText;
+      document.getElementById("note").textContent = t.note;
+
+      document.getElementById("productsTitle").textContent = t.productsTitle;
+      document.getElementById("productsIntro").textContent = t.productsIntro;
+
+      document.getElementById("tagEggs").textContent = t.tagEggs;
+      document.getElementById("eggsTitle").textContent = t.eggsTitle;
+      document.getElementById("eggsDesc").textContent = t.eggsDesc;
+
+      document.getElementById("tagChicken").textContent = t.tagChicken;
+      document.getElementById("chickenTitle").textContent = t.chickenTitle;
+      document.getElementById("chickenDesc").textContent = t.chickenDesc;
+
+      document.getElementById("tagHoney").textContent = t.tagHoney;
+      document.getElementById("honeyTitle").textContent = t.honeyTitle;
+      document.getElementById("honeyDesc").innerHTML = t.honeyDesc;
+
+      document.getElementById("tagPollen").textContent = t.tagPollen;
+      document.getElementById("pollenTitle").textContent = t.pollenTitle;
+      document.getElementById("pollenDesc").innerHTML = t.pollenDesc;
+
+      document.getElementById("galleryTitle").textContent = t.galleryTitle;
+      document.getElementById("galleryIntro").textContent = t.galleryIntro;
+
+      document.getElementById("howTitle").textContent = t.howTitle;
+      const howSteps = document.getElementById("howSteps");
+      howSteps.innerHTML = t.howSteps.map(s => `<li>${s}</li>`).join("");
+      document.getElementById("whatsBtnText2").textContent = t.whatsBtnText2;
+      document.getElementById("note2").textContent = t.note2;
+
+
+      document.getElementById("footerBrand").textContent = t.footerBrand;
+      document.getElementById("footerSlogan").textContent = t.footerSlogan;
+
+      // WhatsApp link
+      const msg = (lang === "es") ? CONFIG.msgES : CONFIG.msgEN;
+      const wa = getWhatsAppLink(msg);
+      document.getElementById("whatsBtn").href = wa;
+      document.getElementById("whatsBtn2").href = wa;
+
+      // Page title (optional)
+      document.title = `${t.brandName} | ${lang === "es" ? "Pedidos por WhatsApp" : "Orders via WhatsApp"}`;
+    }
+
+    // events
+    document.getElementById("btnES").addEventListener("click", () => setLang("es"));
+    document.getElementById("btnEN").addEventListener("click", () => setLang("en"));
+
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // default lang
+    setLang("es");
+
+
+    // ====== Slider simple ======
+    (function initSlider(){
+    const slider = document.getElementById("farmSlider");
+    const track  = document.getElementById("farmTrack");
+    const dotsEl = document.getElementById("farmDots");
+
+    if (!slider || !track || !dotsEl) return;
+
+    const slides = Array.from(track.children);
+    let index = 0;
+    let timer = null;
+    const INTERVAL_MS = 3000; // velocidad del autoplay
+
+    // Crear dots
+    slides.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "dot" + (i === 0 ? " active" : "");
+        b.setAttribute("aria-label", `Ir a imagen ${i+1}`);
+        b.addEventListener("click", () => goTo(i, true));
+        dotsEl.appendChild(b);
+    });
+
+    const dots = Array.from(dotsEl.querySelectorAll(".dot"));
+
+    function update(){
+        track.style.transform = `translateX(${-index * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle("active", i === index));
+    }
+
+    function goTo(i, userAction=false){
+        index = (i + slides.length) % slides.length;
+        update();
+        if (userAction) restart();
+    }
+
+    function next(){ goTo(index + 1); }
+    function prev(){ goTo(index - 1, true); }
+
+    function start(){
+        stop();
+        timer = setInterval(next, INTERVAL_MS);
+    }
+    function stop(){
+        if (timer) clearInterval(timer);
+        timer = null;
+    }
+    function restart(){
+        start();
+    }
+
+    // Botones
+    const prevBtn = slider.querySelector(".nav1.prev");
+    const nextBtn = slider.querySelector(".nav1.next");
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(index - 1, true));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(index + 1, true));
+
+    // Pausar al hover (desktop)
+    slider.addEventListener("mouseenter", stop);
+    slider.addEventListener("mouseleave", start);
+
+    // Swipe básico (móvil)
+    let x0 = null;
+    slider.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; stop(); }, {passive:true});
+    slider.addEventListener("touchend", (e) => {
+        if (x0 == null) return;
+        const x1 = e.changedTouches[0].clientX;
+        const dx = x1 - x0;
+        if (Math.abs(dx) > 40) {
+        if (dx < 0) goTo(index + 1, true);
+        else goTo(index - 1, true);
+        }
+        x0 = null;
+        start();
+    }, {passive:true});
+
+    update();
+    start();
+    })();
+
+
+
+
+  </script>
+</body>
+</html>
