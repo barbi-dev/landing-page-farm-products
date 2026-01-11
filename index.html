@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Alimentos naturales del campo en New Jersey. Huevos, gallinas, miel y polen. Pide por WhatsApp." />
-  <title>Farm Foods</title>
+  <meta name="description" content="Natural foods in New Jersey. Eggs, chicken, hen, honey, pollen. Order via WhatsApp." />
+  <title>Natural Farm Foods</title>
 
   <!-- Color de tema (movil) -->
   <meta name="theme-color" content="#99BC85" />
@@ -96,6 +96,31 @@
       border:1px solid rgba(153,188,133,.35);
       padding: 6px 10px; border-radius:999px;
     }
+    .kickerRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom: 10px;
+    }
+
+    .kickerTag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      font-weight:700;
+      color:#163020;
+      background: rgba(153,188,133,.18);
+      border:1px solid rgba(153,188,133,.35);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .kickerTag .ico{
+      font-size: 14px;
+      line-height: 1;
+    }
+
     .heroTitle{
       margin:14px 0 10px;
       font-size: 40px;
@@ -331,7 +356,12 @@
     <main>
       <div class="hero">
         <section class="heroCard" aria-labelledby="heroTitle">
-          <span class="kicker" id="kicker">🌿 Natural · Local · Precio justo</span>
+          <div class="kickerRow" id="kickerRow">
+            <span class="kickerTag" id="tagChemical"><span class="ico">🧪</span><span>Chemical free</span></span>
+            <span class="kickerTag" id="tagQuality"><span class="ico">⭐</span><span>Good quality</span></span>
+            <span class="kickerTag" id="tagPrice"><span class="ico">💲</span><span>Fair price</span></span>
+          </div>
+
           <h2 class="heroTitle" id="heroTitle">Siente la diferencia. Siente lo natural.</h2>
           <p class="heroText" id="heroText">
             Producimos y vendemos alimentos naturales del campo, libres de químicos.
@@ -474,18 +504,21 @@
         brandName: "Alimentos del Campo",
         brandSub: "Lodi, Belleville, Kearny - NJ · Pedidos por WhatsApp",
         kicker: "🌿 Natural · Local · Precio justo",
+        kickerChemical: "Libre de químicos",
+        kickerQuality: "Buena calidad",
+        kickerPrice: "Precio justo",
         heroTitle: "Siente la diferencia. Siente lo natural.",
-        heroText: "Producimos y vendemos alimentos naturales del campo, libres de químicos",
+        heroText: "Vendemos alimentos naturales del campo, libres de químicos",
         whatsBtnText: "Pedir por WhatsApp",
         seeProductsText: "Ver productos",
-        note: "Los pedidos se entregan este miércoles 07 de enero.",
+        note: "service de entrega | Disponible para recoger",
         deliveryText: "Lodi, Belleville, Kearny - NJ",
         deliveryHint: "Kearny - NJ",
         productsTitle: "Productos",
         productsIntro: "Elige tu favorito y pide directo por WhatsApp.",
         tagEggs: "🥚 Huevos",
         eggsTitle: "Cubetas de huevos",
-        eggsDesc: "Huevos verdes, huevos de campo o cubetas combinadas.",
+        eggsDesc: "cubetas con 30 huevos verdes o combinadas.",
         tagChicken: "🐔 Aves",
         chickenTitle: "Pollos y gallinas",
         chickenDesc: "Pollos de campo (enteros) y gallinas de sopa (enteras).",
@@ -504,7 +537,7 @@
           "Confirmamos disponibilidad y entrega."
         ],
         whatsBtnText2: "Pedir por WhatsApp",
-        note2: "Las entregas se realizarán este miércoles 07 de enero",
+        note2: "Service de entrega | Disponible para recoger",
         footerBrand: "Alimentos del Campo",
         footerSlogan: "“Siente la diferencia. Siente lo natural.”"
       },
@@ -512,18 +545,21 @@
         brandName: "Farm Foods",
         brandSub: "Lodi, Belleville, Kearny - NJ · Orders via WhatsApp",
         kicker: "🌿 Natural · Local · Fair price",
+        kickerChemical: "Chemical-free",
+        kickerQuality: "Good quality",
+        kickerPrice: "Fair price",
         heroTitle: "Taste the difference. Taste natural.",
-        heroText: "We produce and sell natural farm foods with quality at a fair price & chemical-free.",
+        heroText: "We sell natural farm foods, chemical-free.",
         whatsBtnText: "Order on WhatsApp",
         seeProductsText: "See products",
-        note: "Deliveries will be made this Wednesday, January 7th",
+        note: "Delivery service | Available for pickup",
         deliveryText: "Lodi, Belleville, Kearny - NJ",
         deliveryHint: "Kearny - NJ ",
         productsTitle: "Products",
         productsIntro: "Pick your favorite and order directly on WhatsApp.",
         tagEggs: "🥚 Eggs",
         eggsTitle: "Egg trays",
-        eggsDesc: "Green eggs, free-range eggs, or mixed trays.",
+        eggsDesc: "30 green eggs or 30 mixed eggs trays.",
         tagChicken: "🐔 Poultry",
         chickenTitle: "Chicken & soup hens",
         chickenDesc: "Free-range chickens (whole) and soup hens (whole).",
@@ -542,7 +578,7 @@
           "We confirm availability and delivery."
         ],
         whatsBtnText2: "Order on WhatsApp",
-        note2: "Deliveries will be made this Wednesday, January 7th",
+        note2: "Delivery service | Available for pickup",
 
         footerBrand: "Farm Foods",
         footerSlogan: "“Taste the difference. Taste natural.”"
@@ -560,7 +596,9 @@
       // Simple text fields
       document.getElementById("brandName").textContent = t.brandName;
       document.getElementById("brandSub").textContent = t.brandSub;
-      document.getElementById("kicker").textContent = t.kicker;
+      document.getElementById("tagChemical").querySelector("span:last-child").textContent = t.kickerChemical;
+      document.getElementById("tagQuality").querySelector("span:last-child").textContent = t.kickerQuality;
+      document.getElementById("tagPrice").querySelector("span:last-child").textContent = t.kickerPrice; 
       document.getElementById("heroTitle").textContent = t.heroTitle;
       document.getElementById("heroText").textContent = t.heroText;
 
@@ -601,24 +639,24 @@
       document.getElementById("footerSlogan").textContent = t.footerSlogan;
 
       // WhatsApp link
-      const msg = (lang === "es") ? CONFIG.msgES : CONFIG.msgEN;
+      const msg = (lang === "en") ? CONFIG.msgEN : CONFIG.msgES;
       const wa = getWhatsAppLink(msg);
       document.getElementById("whatsBtn").href = wa;
       document.getElementById("whatsBtn2").href = wa;
 
       // Page title (optional)
-      document.title = `${t.brandName} | ${lang === "es" ? "Pedidos por WhatsApp" : "Orders via WhatsApp"}`;
+      document.title = `${t.brandName} | ${lang === "en" ? "Orders via WhatsApp" : "Pedidos por WhatsApp"}`;
     }
 
     // events
-    document.getElementById("btnES").addEventListener("click", () => setLang("es"));
     document.getElementById("btnEN").addEventListener("click", () => setLang("en"));
+    document.getElementById("btnES").addEventListener("click", () => setLang("es"));
 
     // year
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // default lang
-    setLang("es");
+    setLang("en");
 
 
     // ====== Slider simple ======
