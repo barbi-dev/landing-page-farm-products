@@ -42,12 +42,11 @@
     a{color:inherit}
     .container{max-width:var(--max); margin:0 auto; padding:20px}
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px; padding:14px 18px; background: rgba(253,250,246,.75);
+      display:flex; align-items:center; justify-content:space-between; gap: 16px;
+      padding:14px 18px; background: rgba(253,250,246,.75);
       border:1px solid rgba(153,188,133,.25);
-      border-radius: var(--radius);
       backdrop-filter: blur(8px);
-      position: sticky; top: 12px; z-index: 10;
+      position: sticky;top: 1px; z-index: 10;
     }
     .brand{display:flex; align-items:center; gap:12px}
     .logo{
@@ -57,6 +56,7 @@
       overflow:hidden;
     }
     .brand h1{font-size:14px; margin:0; letter-spacing:.2px}
+    h2{margin:auto; text-align:center}
     .brand p{font-size:12px; margin:0; color:var(--muted)}
     .lang{
       display:flex; gap:8px; align-items:center;
@@ -75,23 +75,47 @@
       color: #0f1a14;
     }
 
+
     .hero{
       display:grid;
     }
 
     .heroCard{
-      background: rgba(255,255,255,.7);
+      width: 100%;
+      height: 75vh;
       border:1px solid rgba(153,188,133,.25);
-      border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 12px;
       overflow:hidden;
       position:relative;
+      text-align: center;
+      margin: auto;
+      background-image: url("img/eggs3.jpeg");
+      background-size: cover;
+      background-position: center;
+      padding-top: 8vh;
+    }
+    /* overlay oscuro */
+    .heroCard::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(
+          rgba(0,0,0,0.85),
+          rgba(0,0,0,0.55)
+      );
+      z-index:1;
+    }
+
+    /* contenido por encima */
+    .heroCard > *{
+      position: relative;
+      z-index:2;
     }
 
     .kicker{
       display:inline-flex; align-items:center; gap:8px;
-      font-size:12px; font-weight:700; color: #163020;
+      font-size:12px; font-weight:700; color:#E7E7E7;
       background: rgba(153,188,133,.25);
       border:1px solid rgba(153,188,133,.35);
       padding: 6px 10px; border-radius:999px;
@@ -100,7 +124,8 @@
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+      margin-top: -20px;
     }
 
     .kickerTag{
@@ -109,7 +134,7 @@
       gap:8px;
       font-size:12px;
       font-weight:700;
-      color:#163020;
+      color:#E7E7E7;
       background: rgba(153,188,133,.18);
       border:1px solid rgba(153,188,133,.35);
       padding: 6px 10px;
@@ -126,17 +151,24 @@
       font-size: 40px;
       line-height:1.06;
       letter-spacing:-.6px;
+      color:#ffffff;
     }
     @media (max-width: 520px){
       .heroTitle{font-size:24px}
+      .kickerRow{justify-content: center;}
+      .nav{padding: 5px;}
+      .heroCard{align-items: center;padding: 20vh 8px;justify-items: center;gap:0px}
+
     }
     .heroText{
-      margin:0 0 16px;
-      color: var(--muted);
+      margin:auto ;
+      color:#F3F3F3;
       font-size:16px;
       max-width: 58ch;
+      margin-top: 60px;
+      margin-bottom: 60px;
     }
-    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin: auto; text-align: center; justify-content: center}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
       padding: 8px 12px;
@@ -161,8 +193,9 @@
     }
     .note{
       margin-top: 10px;
-      font-size: 12px;
-      color: var(--muted);
+      font-size: 18px;
+      color:#E7E7E7;
+      font-weight: 900;
     }
 
 
@@ -173,7 +206,9 @@
       gap: 14px;
     }
     @media (max-width: 1000px){ .grid{grid-template-columns: repeat(2,1fr)} }
-    @media (max-width: 520px){ .grid{grid-template-columns: 1fr} }
+    @media (max-width: 520px){ 
+      .grid{grid-template-columns: 1fr}
+      .ctaRow{margin-top: 15vh;}}
 
     .card{
       background: rgba(255,255,255,.75);
@@ -183,6 +218,17 @@
       padding: 13px;
       min-height: 180px;
       display:flex; flex-direction:column; gap:10px;
+      margin: auto;
+    }
+    .howto .card{
+      max-width: 500px;
+      text-align: left;
+    }
+    .howto .note{
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
     }
     .tag{
       display:inline-flex; align-items:center; gap:8px;
@@ -208,6 +254,27 @@
         height: 100%;
         object-fit: cover;
         display: block;
+    }
+    .productList{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .productList li{
+      margin: 4px 0;
+    }
+
+    .productInfo li{
+      margin:0;
+      color: var(--muted);
+      font-size: 12px;
+      padding-left: 0;
+    }
+    .productInfo{
+      margin: 0;
+      padding-left: 30px;
     }
 
     .twoCol{
@@ -239,10 +306,14 @@
       padding: 12px;
     }
     footer{
-      margin: 30px 0 10px;
+      width: 250px;
+      text-align: center;
+      margin: auto;
+      margin-top: 30px;
       color: var(--muted);
       font-size: 12px;
-      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      display:flex; gap:10px; flex-wrap:wrap;
+      flex-direction: column;
     }
     .small{font-size:12px; color:var(--muted)}
     .divider{height:1px; background: rgba(153,188,133,.25); margin: 18px 0}
@@ -326,12 +397,12 @@
     border-color: rgba(0,0,0,.08);
     }
 
+
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <header class="nav">
+  <header class="nav">
       <div class="brand">
         <div class="logo" aria-hidden="true">
           <!-- SVG logo (mismo del favicon) -->
@@ -353,8 +424,7 @@
       </div>
     </header>
 
-    <main>
-      <div class="hero">
+    <div class="hero">
         <section class="heroCard" aria-labelledby="heroTitle">
           <div class="kickerRow" id="kickerRow">
             <span class="kickerTag" id="tagChemical"><span class="ico">🧪</span><span>Chemical free</span></span>
@@ -362,7 +432,7 @@
             <span class="kickerTag" id="tagPrice"><span class="ico">💲</span><span>Fair price</span></span>
           </div>
 
-          <h2 class="heroTitle" id="heroTitle">Siente la diferencia. Siente lo natural.</h2>
+          <h2 class="heroTitle" id="heroTitle">De la naturaleza directo a tu mesa.</h2>
           <p class="heroText" id="heroText">
             Producimos y vendemos alimentos naturales del campo, libres de químicos.
           </p>
@@ -376,12 +446,19 @@
             </a>
           </div>
           <p class="note" id="note">
-            Los pedidos se entregan este miércoles 07 de enero.
+            Available for pickup or delivery in Lodi, Belleville, Kearny - NJ.
           </p>
 
         </section>
 
       </div>
+    
+      </div>
+
+  <div class="container">
+    
+
+    <main>
 
       <section id="productos" aria-labelledby="productsTitle">
         <h2 id="productsTitle">Productos</h2>
@@ -391,41 +468,45 @@
 
         <article class="card">
             <div class="card-img">
-                <img src="img/eggs.jpeg" alt="Cubetas de huevos de campo">
+                <img src="img/eggs2.jpeg" alt="Cubetas de huevos de campo">
             </div>
 
             <span class="tag" id="tagEggs">🥚 Huevos</span>
             <h3 id="eggsTitle">Cubetas de huevos</h3>
-            <p id="eggsDesc">Huevos verdes, huevos de campo o cubetas combinadas.</p>
+            <ul id="eggsDesc" class="productList"></ul>
         </article>
 
 
           <article class="card">
             <div class="card-img">
-                <img src="img/hen.jpeg" alt="Gallina de sopa">
+                <img src="img/chicken.jpeg" alt="Poultry on the farm">
             </div>
             <span class="tag" id="tagChicken">🐔 Aves</span>
             <h3 id="chickenTitle">Pollos y gallinas</h3>
-            <p id="chickenDesc">Pollos de campo (enteros) y gallinas de sopa (enteras).</p>
+            <ul id="chickenDesc" class="productList"></ul>
+            <ul id="chickenInfo" class="productInfo"></ul>
           </article>
 
           <article class="card">
             <div class="card-img">
-                <img src="img/honey.jpeg" alt="Miel en frasco">
+                <img src="img/hen.jpeg" alt="Hen for soup">
+            </div>
+            <span class="tag" id="tagHen">🐔 Gallina de sopa</span>
+            <h3 id="henTitle">Gallina de sopa</h3>
+            <p id="henDesc">Gallina de sopa (entera).</p>
+            <ul id="henInfo" class="productInfo"></ul>
+          </article>
+
+          <article class="card">
+            <div class="card-img">
+                <img src="img/honey3.jpeg" alt="Miel en frasco">
             </div>
             <span class="tag" id="tagHoney">🍯 Miel</span>
             <h3 id="honeyTitle">Miel en frasco</h3>
-            <p id="honeyDesc">Miel natural lista para tu mesa</p>
+            <ul id="honeyDesc" class="productList"></ul>
           </article>
 
-          <article class="card">
-            <div class="card-img">
-                <img src="img/pollen.jpeg" alt="Polen en frasco">
-            </div>
-            <span class="tag" id="tagPollen">🌼 Polen </span>
-            <h3 id="pollenTitle">Polen en frasco</h3>
-            <p id="pollenDesc">Polen natural, tiene propiedades medicinales.</p>
-          </article>
+
         </div>
       </section>
       <section aria-labelledby="galleryTitle">
@@ -436,13 +517,13 @@
         <div class="slider" id="farmSlider" aria-label="Galería de fotos (deslizador)">
             <div class="track" id="farmTrack">
             <figure class="slide">
-                <img src="img/chicken.jpeg" alt="Pollos de campo">
+                <img src="img/client4.jpg" alt="Happy Client">
             </figure>
             <figure class="slide">
-                <img src="img/honey2.jpeg" alt="Miel y polen en frasco">
+                <img src="img/client5.jpg" alt="Happy Client">
             </figure>
             <figure class="slide">
-                <img src="img/eggs1.jpeg" alt="Comparación de huevos">
+                <img src="img/client6.jpg" alt="Happy Client">
             </figure>
             </div>
 
@@ -455,7 +536,7 @@
       </section>
 
 
-      <section class="twoCol" aria-label="Cómo pedir y contacto">
+      <section class="howto" aria-label="Cómo pedir y contacto">
         <div class="card">
           <h3 id="howTitle">Cómo pedir</h3>
           <ol class="steps" id="howSteps">
@@ -466,7 +547,7 @@
           <a class="btn btnPrimary" id="whatsBtn2" href="#" target="_blank" rel="noopener">
             <span aria-hidden="true">📲</span> <span id="whatsBtnText2">Pedir por WhatsApp</span>
           </a>
-          <p class="note" id="note2">Las entregas se realizarán este miércoles 07 de enero</p>
+          <p class="note" id="note2"></p>
         </div>
 
       </section>
@@ -504,32 +585,47 @@
         brandName: "Alimentos del Campo",
         brandSub: "Lodi, Belleville, Kearny - NJ · Pedidos por WhatsApp",
         kicker: "🌿 Natural · Local · Precio justo",
-        kickerChemical: "Libre de químicos",
-        kickerQuality: "Buena calidad",
+        kickerChemical: "Sin químicos",
+        kickerQuality: "Calidad",
         kickerPrice: "Precio justo",
-        heroTitle: "Siente la diferencia. Siente lo natural.",
-        heroText: "Vendemos alimentos naturales del campo, libres de químicos",
+        heroTitle: "De la naturaleza directo a tu mesa.",
+        heroText: "Ofrecemos entrega de productos frescos del campo a tu puerta para que disfrutes de frescura, calidad y productos saludables, todo desde la comodidad de tu hogar.",
         whatsBtnText: "Pedir por WhatsApp",
         seeProductsText: "Ver productos",
-        note: "service de entrega | Disponible para recoger",
+        note: "servicio de entrega | Disponible para recoger",
         deliveryText: "Lodi, Belleville, Kearny - NJ",
         deliveryHint: "Kearny - NJ",
         productsTitle: "Productos",
         productsIntro: "Elige tu favorito y pide directo por WhatsApp.",
         tagEggs: "🥚 Huevos",
         eggsTitle: "Cubetas de huevos",
-        eggsDesc: "cubetas con 30 huevos verdes o combinadas.",
+        eggsDesc: [
+          "$20 - Gallina (30u)",
+          "$9 - Codorniz (18u)",
+          "$8 - Ganso (1u)"
+        ],
         tagChicken: "🐔 Aves",
-        chickenTitle: "Pollos y gallinas",
-        chickenDesc: "Pollos de campo (enteros) y gallinas de sopa (enteras).",
+        chickenTitle: "Pollos",
+        chickenDesc: [
+          "$25 - Pollo mediano",
+          "$30 - Pollo grande"
+        ],
+        chickenInfo: [
+          "Puede contener huevos","Precios pueden variar según disponibilidad"
+        ],
+        tagHen: "🍗 Gallina de sopa",
+        henTitle: "Gallina de sopa",
+        henDesc: "$12 - Gallina de sopa (entera).",
+        henInfo: [
+          "Puede contener huevos","Precios pueden variar según disponibilidad"
+        ],
         tagHoney: "🍯 Miel",
         honeyTitle: "Miel en frasco",
-        honeyDesc: "Miel natural lista para tu mesa.",
-        tagPollen: "🌼 Polen",
-        pollenTitle: "Polen en frasco",
-        pollenDesc: "Polen natural, tiene propiedades medicinales.",
-        galleryTitle: "Fotos de la granja",
-        galleryIntro: "Mini galería.",
+        honeyDesc: ["$20 - 16oz", 
+        "$30 - 32oz"],
+
+        galleryTitle: "Nuestros Clientes",
+        galleryIntro: "¡Clientes felices!",
         howTitle: "Cómo pedir",
         howSteps: [
           "Escríbenos por WhatsApp.",
@@ -539,7 +635,7 @@
         whatsBtnText2: "Pedir por WhatsApp",
         note2: "Service de entrega | Disponible para recoger",
         footerBrand: "Alimentos del Campo",
-        footerSlogan: "“Siente la diferencia. Siente lo natural.”"
+        footerSlogan: "“De la naturaleza directo a tu mesa.”"
       },
       en: {
         brandName: "Farm Foods",
@@ -548,8 +644,8 @@
         kickerChemical: "Chemical-free",
         kickerQuality: "Good quality",
         kickerPrice: "Fair price",
-        heroTitle: "Taste the difference. Taste natural.",
-        heroText: "We sell natural farm foods, chemical-free.",
+        heroTitle: "Straight from the nature to your table.",
+        heroText: "We offer farm-fresh products delivery to your doorstep so you can enjoy freshness, quality, and healthy products, all from the comfort of your home.",
         whatsBtnText: "Order on WhatsApp",
         seeProductsText: "See products",
         note: "Delivery service | Available for pickup",
@@ -558,19 +654,28 @@
         productsTitle: "Products",
         productsIntro: "Pick your favorite and order directly on WhatsApp.",
         tagEggs: "🥚 Eggs",
-        eggsTitle: "Egg trays",
-        eggsDesc: "30 green eggs or 30 mixed eggs trays.",
+        eggsTitle: "Free-Range Eggs",
+        eggsDesc: [
+          "$20 - Hen (30u)",
+          "$9 - Quail (18u)",
+          "$8 - Goose (1u)"
+        ],
         tagChicken: "🐔 Poultry",
-        chickenTitle: "Chicken & soup hens",
-        chickenDesc: "Free-range chickens (whole) and soup hens (whole).",
+        chickenTitle: "Pasture-Raised Chicken",
+        chickenDesc: ["$25 - Pullet",
+        "$30 - Chicken"],
+        chickenInfo:["May contain unlaid eggs","Prices may vary, subject to availability"],
+        tagHen: "🍗 Soup Hens",
+        henTitle:"Traditional Soup Hens",
+        henDesc:"$12 - Hen",
+        henInfo:["May contain unlaid eggs","Prices may vary, subject to availability"],
         tagHoney: "🍯 Honey",
         honeyTitle: "Honey in jars",
-        honeyDesc: "Natural honey ready for your table.",
-        tagPollen: "🌼 Pollen",
-        pollenTitle: "Pollen in jars",
-        pollenDesc: "Natural pollen with healing properties.",
-        galleryTitle: "Farm photos",
-        galleryIntro: "Small gallery.",
+        honeyDesc: ["$20 - 16oz", 
+        "$30 - 32oz"],
+
+        galleryTitle: "What People Say",
+        galleryIntro: "Happy Customers!",
         howTitle: "How to order",
         howSteps: [
           "Message us on WhatsApp.",
@@ -581,7 +686,7 @@
         note2: "Delivery service | Available for pickup",
 
         footerBrand: "Farm Foods",
-        footerSlogan: "“Taste the difference. Taste natural.”"
+        footerSlogan: "“Straight from the nature to your table.”"
       }
     };
 
@@ -611,19 +716,26 @@
 
       document.getElementById("tagEggs").textContent = t.tagEggs;
       document.getElementById("eggsTitle").textContent = t.eggsTitle;
-      document.getElementById("eggsDesc").textContent = t.eggsDesc;
+      const eggsList = document.getElementById("eggsDesc");
+      eggsList.innerHTML = t.eggsDesc.map(item => `<li>${item}</li>`).join("");
 
       document.getElementById("tagChicken").textContent = t.tagChicken;
       document.getElementById("chickenTitle").textContent = t.chickenTitle;
-      document.getElementById("chickenDesc").textContent = t.chickenDesc;
+      const chickenList = document.getElementById("chickenDesc");
+      chickenList.innerHTML = t.chickenDesc.map(item => `<li>${item}</li>`).join("");
+      const chickenInfoList = document.getElementById("chickenInfo");
+      chickenInfoList.innerHTML = t.chickenInfo.map(item => `<li>${item}</li>`).join("");
+
+      document.getElementById("tagHen").textContent = t.tagHen;
+      document.getElementById("henTitle").textContent = t.henTitle;   
+      document.getElementById("henDesc").textContent = t.henDesc;
+      const henInfoList = document.getElementById("henInfo");
+      henInfoList.innerHTML = t.henInfo.map(item => `<li>${item}</li>`).join("");
 
       document.getElementById("tagHoney").textContent = t.tagHoney;
       document.getElementById("honeyTitle").textContent = t.honeyTitle;
-      document.getElementById("honeyDesc").innerHTML = t.honeyDesc;
-
-      document.getElementById("tagPollen").textContent = t.tagPollen;
-      document.getElementById("pollenTitle").textContent = t.pollenTitle;
-      document.getElementById("pollenDesc").innerHTML = t.pollenDesc;
+      const honeyList = document.getElementById("honeyDesc");
+      honeyList.innerHTML = t.honeyDesc.map(item => `<li>${item}</li>`).join("");
 
       document.getElementById("galleryTitle").textContent = t.galleryTitle;
       document.getElementById("galleryIntro").textContent = t.galleryIntro;
