@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://farm-foods-nj.vercel.app/sitemap.xml
