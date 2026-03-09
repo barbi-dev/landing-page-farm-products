@@ -84,7 +84,7 @@
 
     .heroCard{
       width: 100%;
-      height: 75vh;
+      height: 80vh;
       border:1px solid rgba(153,188,133,.25);
       box-shadow: var(--shadow);
       padding: 12px;
@@ -155,7 +155,7 @@
       letter-spacing:-.6px;
       color:#ffffff;
     }
-    @media (max-width: 520px){
+    @media (max-width: 750px){
       .heroCard{height: auto; padding: 8vw 8px}
       .heroTitle{font-size:24px}
       .kickerRow{justify-content: center;}
@@ -200,6 +200,149 @@
       font-size: 18px;
       color:#E7E7E7;
       font-weight: 900;
+    }
+
+    .followGlass{
+      display:flex;
+      justify-content:center;
+      margin-top:18px;
+    }
+
+    .instaGlass{
+
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+
+      padding:12px 22px;
+
+      border-radius:30px;
+
+      color:white;
+      font-weight:500;
+      font-size:15px;
+
+      text-decoration:none;
+
+      background:rgba(255,255,255,0.15);
+
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+
+      border:1px solid rgba(255,255,255,0.25);
+
+      box-shadow:
+        0 6px 20px rgba(0,0,0,0.25);
+
+      transition:all .25s ease;
+    }
+
+    .instaGlass:hover{
+
+      transform:translateY(-2px);
+
+      background:linear-gradient(
+        135deg,
+        #f58529,
+        #dd2a7b,
+        #8134af,
+        #515bd4
+      );
+
+      border-color:transparent;
+    }
+
+    .instaIcon{
+      width:18px;
+      height:18px;
+      fill:white;
+    }
+
+    .btnPremium,
+    .instaGlass{
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        background .22s ease,
+        border-color .22s ease;
+      animation: btnFadeUp .65s ease both;
+    }
+
+    .whatsBtn{
+      animation-delay: .18s;
+    }
+
+    .instaGlass{
+      animation-delay: .28s;
+    }
+
+    .btnPremium:hover,
+    .instaGlass:hover{
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    .btnPremium:active,
+    .instaGlass:active{
+      transform: scale(.98);
+    }
+
+    .btnPremium::before,
+    .instaGlass::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-120%;
+      width:60%;
+      height:100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.28),
+        transparent
+      );
+      transition: left .55s ease;
+    }
+
+    .btnPremium:hover::before,
+    .instaGlass:hover::before{
+      left: 130%;
+    }
+
+    .btnPremium{
+      box-shadow:
+        0 8px 18px rgba(0,0,0,.14),
+        inset 0 1px 0 rgba(255,255,255,.22);
+    }
+
+    .btnPremium:hover{
+      box-shadow:
+        0 14px 28px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.28);
+    }
+
+    .instaGlass{
+      box-shadow:
+        0 8px 22px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.18);
+    }
+
+    .instaGlass:hover{
+      box-shadow:
+        0 16px 30px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.24);
+    }
+
+    @keyframes btnFadeUp{
+      from{
+        opacity:0;
+        transform: translateY(10px);
+      }
+      to{
+        opacity:1;
+        transform: translateY(0);
+      }
     }
 
 
@@ -452,6 +595,23 @@
           <p class="note" id="note">
             Available for pickup or delivery in Lodi, Belleville, Kearny - NJ.
           </p>
+
+          <div class="followGlass">
+
+            <a href="https://www.instagram.com/farm_food.s/"
+              target="_blank"
+              class="instaGlass"
+              aria-label="Follow us on Instagram">
+
+              <svg class="instaIcon" viewBox="0 0 24 24">
+                <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9zm10.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+              </svg>
+
+              <span>Follow us</span>
+
+            </a>
+
+          </div>
 
         </section>
 
